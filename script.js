@@ -1,34 +1,53 @@
-function addToList(){
-    // grab the text the user typed in
-    task = document.getElementById("todo-task").value
+// add button element
+const btnAdd = document.querySelector("#btn-add");
+// clear all button element
+const btnClearAll = document.querySelector("#btn-clear-all")
+// remove one button element
+const btnRemove = document.querySelector("#btn-remove")
+// text box element
+const toDoText = document.querySelector("#todo-text");
+// list element
+const toDoList = document.querySelector('#todolist-working');
 
-    // grab the <ul> element
-    list = document.getElementById('todolist')    
-    
-    // creating a li element
-    const toDoItem = document.createElement("li");
-    toDoItem.classList.add("items");
-    // append the task into the li element ---> <li>[task]</li>
-    toDoItem.append(task)
-    
-    // append <li>[task]</li>  to <ul></ul> -- put the element to html
-    list.appendChild(toDoItem);
-}
+
+let task = "";
+// let abc = ""
+btnAdd.addEventListener("click",function(){
+  console.log()
+
+  task += `<li>${toDoText.value}</li>`
+  toDoList.innerHTML = task;
+  
+  // clears text box 
+  toDoText.value = ""
+  // refocus dursor on text box
+  toDoText.focus()
+})
+
+// removes all items from list
+btnClearAll.addEventListener("click",function(){
+  toDoList.innerHTML = "";
+  task = ""
+})
+
+// remove button -- removes the last item appended
+btnRemove.addEventListener("click",function(){
+  let lis = document.getElementById("todolist-working").getElementsByTagName('li').length;
+  toDoList.removeChild(toDoList.childNodes[lis-1]);
+})
+
+
+
+
+
+
+
+
+
 
 function clearList(){
     // grabb ul tag
     // list = document.querySelectorAll('.items');
     list = document.querySelector("#todolist").querySelector(".items")
     list.remove();
-}
-
-function clearAll() {
-    list = document.querySelector("#todolist")
-    list.remove()
-
-    yo = document.querySelector("#list")
-    
-    ayo = document.createElement("ul")
-    ayo.setAttribute("id","todolist")
-    yo.appendChild(ayo);
 }
